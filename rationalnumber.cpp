@@ -36,7 +36,11 @@ bool rnEqual(RationalNumber a, RationalNumber b){
     int min_a = euclid(a.numerator, a.denominator);
     int min_b = euclid(b.numerator, b.denominator);
 
+    if(min_a == 0) {min_a = 1;}
+    if(min_b == 0) {min_b = 1;}
+
     RationalNumber i = {(a.numerator/min_a),(a.denominator/min_a)};
+
     RationalNumber j = {(b.numerator/min_b),(b.denominator/min_b)};
 
 
@@ -61,6 +65,9 @@ bool rnLessThan(RationalNumber a, RationalNumber b){
     int min_a = euclid(a.numerator, a.denominator);
     int min_b = euclid(b.numerator, b.denominator);
 
+    if(min_a == 0) {min_a = 1;}
+    if(min_b == 0) {min_b = 1;}
+
     RationalNumber i = {(a.numerator/min_a),(a.denominator/min_a)};
     RationalNumber j = {(b.numerator/min_b),(b.denominator/min_b)};
 
@@ -82,13 +89,27 @@ bool rnLessThan(RationalNumber a, RationalNumber b){
  */
 RationalNumber rnAdd(RationalNumber a, RationalNumber b){
 
+    if(a.denominator == 0 || a.numerator == 0)
+    {
+        return b;
+    }
+
+
+    if(b.denominator == 0 || b.numerator == 0){
+        return a;
+    }
+
     int y = a.denominator*b.denominator;
 
     int x = ((a.numerator*b.denominator)+(b.numerator*a.denominator));
 
     int min = euclid(x,y);
+    x= x/min;
+    y= y/min;
 
-return RationalNumber{(x/min),(y/min)};
+    RationalNumber rn = {x,y};
+
+return rn;
 
 }
 
@@ -108,8 +129,12 @@ RationalNumber rnSubtract(RationalNumber a, RationalNumber b){
     int x = ((a.numerator*b.denominator)-(b.numerator*a.denominator));
 
     int min = euclid(x,y);
+    x= x/min;
+    y= y/min;
 
-return RationalNumber{(x/min),(y/min)};
+    RationalNumber rn = {x,y};
+
+return rn;
 
 }
 
@@ -129,7 +154,12 @@ RationalNumber rnMultiply(RationalNumber a, RationalNumber b){
 
     int min = euclid(x,y);
 
-return RationalNumber{(x/min),(y/min)};
+    x= x/min;
+    y= y/min;
+
+    RationalNumber rn = {x,y};
+
+return rn;
 
 
 }
@@ -151,7 +181,12 @@ RationalNumber rnDivide(RationalNumber a, RationalNumber b){
 
     int min = euclid(x,y);
 
-return RationalNumber{(x/min),(y/min)};
+    x= x/min;
+    y= y/min;
+
+    RationalNumber rn = {x,y};
+
+return rn;
 
 }
 

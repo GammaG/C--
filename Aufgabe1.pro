@@ -6,9 +6,12 @@ CONFIG -= qt
 SOURCES += \
     testRN.cpp \
     rationalnumber.cpp \
-    RationalNumberCollection.cpp
+    rationalnumbercollection.cpp \
+    selectionsort.cpp
 
 HEADERS += \
     rationalnumber.h \
-    RationalNumberCollection.h
+    rationalnumbercollection.h \
+    ../selectionsort.h \
+    selectionsort.h
 

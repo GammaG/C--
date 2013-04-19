@@ -6,6 +6,8 @@
 #include <assert.h>
 
 #include "rationalnumber.h"
+#include "rationalnumbercollection.h"
+#include "selectionsort.h"
 
 using namespace std;
 
@@ -42,7 +44,37 @@ int main()
     assert( rnEqual(t2, t3) );
     assert( !rnIsValid(t4) );
 
-    printf(" successful!\n");
+    printf("successful!\n");
+
+    printf("from here on number 1.2\n");
+
+    RationalNumberCollection c;
+    rncInit(&c);
+    RationalNumber n={1,2};
+    rncAdd(&c, n);
+
+    rncAdd(&c,n0);
+    rncAdd(&c,n1);
+    rncAdd(&c,n2);
+    rncAdd(&c,n3);
+    rncAdd(&c,n4);
+    rncAdd(&c,n5);
+    rncAdd(&c,n6);
+
+    printf("hinzufuegen hat geklappt\n");
+
+    RationalNumber sum = {13,2};
+
+    assert( rnEqual(rncSum(&c),sum));
+    assert( rncMatchNumber(rncTotalCount(&c), 8));
+    assert( rncMatchNumber(rncTotalUniqueCount(&c), 6));
+    assert( rncMatchNumber(rncCount(&c,n5),1));
+
+    RationalNumber ava = {0,1};
+
+    assert (rnEqual(rncAverage(&c),ava));
+
+    printf("Vergleiche waren erfolgreich\n");
 
     return 0;
 }
