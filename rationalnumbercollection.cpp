@@ -1,11 +1,30 @@
 #include "rationalnumbercollection.h"
 #include "rationalnumber.h";
-#include "selectionsort.h"
-#include "binary_search.h"
+
+#include <stdlib.h>
 
 /** Beinhaltet und deklariert alle im Header definierten Methoden der RationalNumberCollection
  */
 
+/**
+ * @brief The Speichereinheit struct
+ */
+struct Speichereinheit{
+
+    RationalNumber bruch;
+    int anzahl;
+};
+
+/**
+ * @brief The RationalNumberCollection struct
+ */
+struct RationalNumberCollection{
+    Speichereinheit* liste;
+    int anzahl;
+    int unique;
+    int arraySize;
+    RationalNumber sum;
+};
 
 /**
  * Initialisiert alle Attrubute und gibt ihnen einen Startwert
@@ -13,12 +32,55 @@
  * @param c
  */
 void rncInit(RationalNumberCollection *c){
+
     c->anzahl=0;
     c->unique=0;
     c->sum.denominator=0;
     c->sum.numerator=0;
 
 }
+
+/** erzeugt die RationalNumberCollection gibt den Verweis zurueck,
+ *  erstellt ein Array von der uebergebenen Groeße
+ * @brief rncCreate
+ * @param number
+ * @return
+ */
+RationalNumberCollection* rncCreate(int number){
+
+    RationalNumberCollection* rnc = (RationalNumberCollection*) malloc(sizeof(RationalNumberCollection));
+    rnc->liste = (Speichereinheit*) malloc(sizeof(Speichereinheit)*number);
+    rnc->arraySize = number;
+    rncInit(rnc);
+    return rnc;
+
+}
+
+/** Gibt den Speicher frei
+ * @brief rncDelete
+ * @param c
+ */
+void rncDelete(RationalNumberCollection* c){
+    free(c);
+}
+
+/** Vergroßert das array
+ * @brief addFieldToArray
+ * @param c
+ */
+void addFieldToArray(RationalNumberCollection* c){
+    Speichereinheit* listeTemp = (Speichereinheit*) malloc(sizeof(Speichereinheit)*(c->arraySize +10));
+
+    for(int i= 0;i < c->arraySize; i++){
+        listeTemp[i] = c->liste[i];
+    }
+    c->arraySize += 10;
+    free(c->liste);
+    c->liste = listeTemp;
+
+}
+
+
 
 /** Addiert einen Bruch in die Liste,
  * addiert ebenfalls sofort die summe und Sortiert die liste
@@ -37,6 +99,9 @@ void rncAdd(RationalNumberCollection *c,RationalNumber n){
         }
 
     else {
+        if(c->unique == c->arraySize){
+            addFieldToArray(c);
+        }
         c->liste[c->unique].bruch= n;
         c->liste[c->unique].anzahl += 1;
         c->unique++;
@@ -168,4 +233,90 @@ bool rncMatchNumber(int a, int b){
 
     return false;
 
+}
+
+
+/**
+ * Sortiert eine Liste von Speichereinheiten gegeben in RationalNumberCollection nach der größe.
+ * @brief sorting
+ * @param c
+ */
+
+void sorting(RationalNumberCollection *c){
+
+
+int posOfMinimum = -1;
+RationalNumber x = {-999,-999};
+Speichereinheit valueOfMinimum = {x,0};
+int sortetUpToPos = 0;
+
+
+for (int j = 0; j < c->unique; j++) {
+            valueOfMinimum = c->liste[j];
+
+            for (int i = sortetUpToPos; i < c->unique; i++) {
+
+                Speichereinheit currentValue = c->liste[i];
+
+                posOfMinimum = -1;
+                if (rnLessThan(currentValue.bruch,valueOfMinimum.bruch)) {
+                    posOfMinimum = i;
+                    valueOfMinimum = currentValue;
+
+                }
+            }
+
+            for (int i = posOfMinimum; i > sortetUpToPos; --i) {
+                c->liste[i] = c->liste[i - 1];
+
+            }
+
+            c->liste[sortetUpToPos] = valueOfMinimum;
+             ++sortetUpToPos;
+        }
+}
+
+
+/**
+ * Sucht mit binaerer Suche in einer Liste nach einer Ralationalzahl
+ * gibt entweder -1 bei nicht gefunden, oder die Position im Array zurück.
+ * @brief bin_search
+ * @param c
+ * @param n
+ * @return
+ */
+
+int bin_search(RationalNumberCollection *c, RationalNumber n){
+
+ int mitte;
+ int links = 0;
+ int rechts = c->unique -1;
+
+if(c->unique == 0){
+    return -1;
+}
+
+for(;;){
+
+    mitte = ((rechts+links)/2); //bereich wird halbiert
+
+    if(rechts < links){
+        return -1;
+    }
+
+    // n gefunden ?
+    if(rnEqual(c->liste[mitte].bruch,n)){
+        return mitte;
+    }
+
+    if(rnLessThan(n,c->liste[mitte].bruch)){
+        rechts = mitte-1;
+
+    } else {
+
+        links = mitte+1;
+    }
+
+}
+    return -1;
 }

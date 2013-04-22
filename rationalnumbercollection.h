@@ -8,11 +8,7 @@
  * @brief The Speichereinheit struct
  */
 
-struct Speichereinheit{
-
-    RationalNumber bruch;
-    int anzahl;
-};
+struct Speichereinheit;
 
 /**
  * Verwaltet eine liste von Speichereinheiten, sowie die anzahl aller und uniquer
@@ -20,20 +16,17 @@ struct Speichereinheit{
  *
  * @brief The RationalNumberCollection struct
  */
-struct RationalNumberCollection{
-
-    Speichereinheit liste[1000];
-    RationalNumber sum;
-    int anzahl;
-    int unique;
-
-};
+struct RationalNumberCollection;
 
 
 /** Definierung aller methoden der RationalNumberCollection
  * @brief rncInit
  * @param c
  */
+
+int bin_search(RationalNumberCollection *c, RationalNumber n);
+void sorting(RationalNumberCollection *c);
+RationalNumberCollection* rncCreate(int number);
 void rncInit(RationalNumberCollection *c);
 void rncAdd(RationalNumberCollection *c,RationalNumber n);
 int rncCount(RationalNumberCollection *c, RationalNumber n);
@@ -44,6 +37,7 @@ int rncTotalCount(RationalNumberCollection *c);
 RationalNumber rncSum(RationalNumberCollection *c);
 RationalNumber rncAverage(RationalNumberCollection *c);
 bool rncMatchNumber(int a, int b);
+void rncDelete(RationalNumberCollection* c);
 
 
 #endif // RATIONALNUMBERCOLLECTION_H

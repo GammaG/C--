@@ -6,15 +6,11 @@ CONFIG -= qt
 SOURCES += \
     testRN.cpp \
     rationalnumber.cpp \
-    rationalnumbercollection.cpp \
-    selectionsort.cpp \
-    binary_search.cpp
+    rationalnumbercollection.cpp
 
 HEADERS += \
     rationalnumber.h \
     rationalnumbercollection.h \
     ../selectionsort.h \
-    selectionsort.h \
-    ../binary_search.h \
-    binary_search.h
+    ../binary_search.h
 

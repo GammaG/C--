@@ -7,7 +7,7 @@
 
 #include "rationalnumber.h"
 #include "rationalnumbercollection.h"
-#include "selectionsort.h"
+
 
 using namespace std;
 
@@ -46,35 +46,42 @@ int main()
 
     printf("successful!\n");
 
-    printf("from here on number 1.2\n");
+    printf("from here on number 1.3\n");
 
-    RationalNumberCollection c;
-    rncInit(&c);
+    printf("RationalNumberCollection erzeugt\n");
+    RationalNumberCollection* c = rncCreate(4);
+    //rncInit(c);
     RationalNumber n={1,2};
-    rncAdd(&c, n);
+    rncAdd(c, n);
 
-    rncAdd(&c,n0);
-    rncAdd(&c,n1);
-    rncAdd(&c,n2);
-    rncAdd(&c,n3);
-    rncAdd(&c,n4);
-    rncAdd(&c,n5);
-    rncAdd(&c,n6);
+    rncAdd(c,n0);
+    rncAdd(c,n1);
+    rncAdd(c,n2);
+    rncAdd(c,n3);
+    rncAdd(c,n4);
+    rncAdd(c,n5);
+    rncAdd(c,n6);
 
     printf("hinzufuegen hat geklappt\n");
 
     RationalNumber sum = {13,2};
 
-    assert( rnEqual(rncSum(&c),sum));
-    assert( rncMatchNumber(rncTotalCount(&c), 8));
-    assert( rncMatchNumber(rncTotalUniqueCount(&c), 6));
-    assert( rncMatchNumber(rncCount(&c,n5),1));
+    assert( rnEqual(rncSum(c),sum));
+    assert( rncMatchNumber(rncTotalCount(c), 8));
+    assert( rncMatchNumber(rncTotalUniqueCount(c), 6));
+    assert( rncMatchNumber(rncCount(c,n5),1));
 
     RationalNumber ava = {0,1};
 
-    assert (rnEqual(rncAverage(&c),ava));
+    assert (rnEqual(rncAverage(c),ava));
 
     printf("Vergleiche waren erfolgreich\n");
+
+    rncDelete(c);
+    printf("RationalNumberCollection speicher freigegeben\n");
+    printf("cya around\n\n");
+
+
 
     return 0;
 }
