@@ -3,12 +3,6 @@
 
 #include "rationalnumber.h"
 
-/**
- * Verwaltet einen Bruch und dessen Anzahl
- * @brief The Speichereinheit struct
- */
-
-struct Speichereinheit;
 
 /**
  * Verwaltet eine liste von Speichereinheiten, sowie die anzahl aller und uniquer
@@ -24,8 +18,7 @@ struct RationalNumberCollection;
  * @param c
  */
 
-int bin_search(RationalNumberCollection *c, RationalNumber n);
-void sorting(RationalNumberCollection *c);
+
 RationalNumberCollection* rncCreate(int number);
 void rncInit(RationalNumberCollection *c);
 void rncAdd(RationalNumberCollection *c,RationalNumber n);

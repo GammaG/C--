@@ -6,6 +6,9 @@
 /** Beinhaltet und deklariert alle im Header definierten Methoden der RationalNumberCollection
  */
 
+int bin_search(RationalNumberCollection *c, RationalNumber n);
+void sorting(RationalNumberCollection *c);
+
 /**
  * @brief The Speichereinheit struct
  */
@@ -61,10 +64,11 @@ RationalNumberCollection* rncCreate(int number){
  * @param c
  */
 void rncDelete(RationalNumberCollection* c){
+    free(c->liste);
     free(c);
 }
 
-/** Vergroßert das array
+/** Vergroeßert das array
  * @brief addFieldToArray
  * @param c
  */
