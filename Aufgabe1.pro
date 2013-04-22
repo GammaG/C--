@@ -7,11 +7,14 @@ SOURCES += \
     testRN.cpp \
     rationalnumber.cpp \
     rationalnumbercollection.cpp \
-    selectionsort.cpp
+    selectionsort.cpp \
+    binary_search.cpp
 
 HEADERS += \
     rationalnumber.h \
     rationalnumbercollection.h \
     ../selectionsort.h \
-    selectionsort.h
+    selectionsort.h \
+    ../binary_search.h \
+    binary_search.h
 

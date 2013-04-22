@@ -1,7 +1,7 @@
 #include "rationalnumbercollection.h"
 #include "rationalnumber.h";
 #include "selectionsort.h"
-
+#include "binary_search.h"
 
 /** Beinhaltet und deklariert alle im Header definierten Methoden der RationalNumberCollection
  */
@@ -28,7 +28,8 @@ void rncInit(RationalNumberCollection *c){
  */
 void rncAdd(RationalNumberCollection *c,RationalNumber n){
 
-    int i = findInList(c,n);
+  //  int i = findInList(c,n);
+    int i = bin_search(c,n);
     if(i > -1){
 
         c->liste[i].anzahl++;
@@ -56,7 +57,8 @@ void rncAdd(RationalNumberCollection *c,RationalNumber n){
  */
 int rncCount(RationalNumberCollection *c, RationalNumber n){
 
-    int i = findInList(c,n);
+    //int i = findInList(c,n);
+    int i = bin_search(c,n);
     if(i>-1){
 
             return c->liste[i].anzahl;
@@ -75,7 +77,8 @@ int rncCount(RationalNumberCollection *c, RationalNumber n){
  */
 void rncRemove(RationalNumberCollection *c, RationalNumber n){
 
-int i = findInList(c,n);
+//int i = findInList(c,n);
+    int i = bin_search(c,n);
         if(i>-1){
             c->liste[i].anzahl--;
             c->anzahl--;
